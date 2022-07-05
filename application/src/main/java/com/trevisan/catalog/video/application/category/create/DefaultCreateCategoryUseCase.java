@@ -3,7 +3,7 @@ package com.trevisan.catalog.video.application.category.create;
 import com.trevisan.catalog.video.domain.category.Category;
 import com.trevisan.catalog.video.domain.category.CategoryGateway;
 import com.trevisan.catalog.video.domain.validation.handler.Notification;
-import com.trevisan.catalog.video.domain.validation.handler.ThrowsValidationHandler;
+import io.vavr.control.Either;
 
 import java.util.Objects;
 
@@ -15,7 +15,7 @@ public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
     }
 
     @Override
-    public CreateCategoryOutput execute(final CreateCategoryCommand aCommand) {
+    public Either<Notification, CreateCategoryOutput> execute(final CreateCategoryCommand aCommand) {
         final var aName = aCommand.name();
         final var aDescription = aCommand.description();
         final var isActive = aCommand.isActive();
