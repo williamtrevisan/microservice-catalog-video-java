@@ -2,6 +2,7 @@ package com.trevisan.catalog.video.application.category.create;
 
 import com.trevisan.catalog.video.domain.category.Category;
 import com.trevisan.catalog.video.domain.category.CategoryGateway;
+import com.trevisan.catalog.video.domain.validation.handler.Notification;
 import com.trevisan.catalog.video.domain.validation.handler.ThrowsValidationHandler;
 
 import java.util.Objects;
@@ -19,8 +20,14 @@ public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
         final var aDescription = aCommand.description();
         final var isActive = aCommand.isActive();
 
+        final var notification = Notification.create();
+
         final var aCategory = Category.newCategory(aName, aDescription, isActive);
-        aCategory.validate(new ThrowsValidationHandler());
+        aCategory.validate(notification);
+
+        if (notification.hasErrors()) {
+            //
+        }
 
         return CreateCategoryOutput.from(this.categoryGateway.create(aCategory));
     }
