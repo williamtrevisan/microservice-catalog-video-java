@@ -1,7 +1,6 @@
 package com.trevisan.catalog.video.application.category.create;
 
 import com.trevisan.catalog.video.domain.category.CategoryGateway;
-import com.trevisan.catalog.video.domain.exceptions.DomainException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
