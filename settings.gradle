@@ -1,0 +1,5 @@
+rootProject.name = 'microservice-catalog-video-java'
+include 'domain'
+include 'application'
+include 'infrastructure'
+
