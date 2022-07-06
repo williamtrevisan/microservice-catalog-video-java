@@ -13,7 +13,7 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class DeleteCategoryUseCaseTest {
@@ -31,9 +31,10 @@ public class DeleteCategoryUseCaseTest {
     @Test
     public void givenAValidID_whenCallsDeleteCategory_shouldBeOK() {
         final var aCategory = Category.newCategory("Category name", null, true);
+
         final var expectedId = aCategory.getId();
 
-        Mockito.doNothing().when(categoryGateway).deleteById(eq(expectedId));
+        doNothing().when(categoryGateway).deleteById(eq(expectedId));
 
         Assertions.assertDoesNotThrow(() -> deleteCategoryUseCase.execute(expectedId.getValue()));
 
@@ -44,7 +45,7 @@ public class DeleteCategoryUseCaseTest {
     public void givenAInvalidID_whenCallsDeleteCategory_shouldBeOK() {
         final var expectedId = CategoryID.from("123");
 
-        Mockito.doNothing().when(categoryGateway).deleteById(eq(expectedId));
+        doNothing().when(categoryGateway).deleteById(eq(expectedId));
 
         Assertions.assertDoesNotThrow(() -> deleteCategoryUseCase.execute(expectedId.getValue()));
 
@@ -54,9 +55,10 @@ public class DeleteCategoryUseCaseTest {
     @Test
     public void givenAValidID_whenGatewayThrowsError_shouldReturnException() {
         final var aCategory = Category.newCategory("Category name", null, true);
+
         final var expectedId = aCategory.getId();
 
-        Mockito.doThrow(new IllegalStateException("Gateway error"))
+        doThrow(new IllegalStateException("Gateway error"))
                 .when(categoryGateway).deleteById(eq(expectedId));
 
         Assertions.assertThrows(IllegalStateException.class, () -> deleteCategoryUseCase.execute(expectedId.getValue()));
