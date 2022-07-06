@@ -13,7 +13,7 @@ import static io.vavr.API.Try;
 public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
     private final CategoryGateway categoryGateway;
 
-    public DefaultCreateCategoryUseCase(CategoryGateway categoryGateway) {
+    public DefaultCreateCategoryUseCase(final CategoryGateway categoryGateway) {
         this.categoryGateway = Objects.requireNonNull(categoryGateway);
     }
 
@@ -31,7 +31,7 @@ public class DefaultCreateCategoryUseCase extends CreateCategoryUseCase {
         return notification.hasErrors() ? Left(notification) : create(aCategory);
     }
 
-    private Either<Notification, CreateCategoryOutput> create(Category aCategory) {
+    private Either<Notification, CreateCategoryOutput> create(final Category aCategory) {
         return Try(() -> this.categoryGateway.create(aCategory))
                 .toEither()
                 .bimap(Notification::create, CreateCategoryOutput::from);

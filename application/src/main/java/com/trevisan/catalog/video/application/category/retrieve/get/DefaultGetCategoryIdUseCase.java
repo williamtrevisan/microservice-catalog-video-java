@@ -11,12 +11,12 @@ import java.util.function.Supplier;
 public class DefaultGetCategoryIdUseCase extends GetCategoryByIdUseCase {
     private final CategoryGateway categoryGateway;
 
-    public DefaultGetCategoryIdUseCase(CategoryGateway categoryGateway) {
+    public DefaultGetCategoryIdUseCase(final CategoryGateway categoryGateway) {
         this.categoryGateway = Objects.requireNonNull(categoryGateway);
     }
 
     @Override
-    public CategoryOutput execute(String anIn) {
+    public CategoryOutput execute(final String anIn) {
         final var aCategoryID = CategoryID.from(anIn);
 
         return this.categoryGateway.findById(aCategoryID)

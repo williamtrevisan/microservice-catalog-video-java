@@ -17,12 +17,12 @@ import static io.vavr.API.Try;
 public class DefaultUpdateCategoryUseCase extends UpdateCategoryUseCase {
     private final CategoryGateway categoryGateway;
 
-    public DefaultUpdateCategoryUseCase(CategoryGateway categoryGateway) {
+    public DefaultUpdateCategoryUseCase(final CategoryGateway categoryGateway) {
         this.categoryGateway = Objects.requireNonNull(categoryGateway);
     }
 
     @Override
-    public Either<Notification, UpdateCategoryOutput> execute(UpdateCategoryCommand aCommand) {
+    public Either<Notification, UpdateCategoryOutput> execute(final UpdateCategoryCommand aCommand) {
         final var anId = CategoryID.from(aCommand.id());
         final var aName = aCommand.name();
         final var aDescription = aCommand.description();
